@@ -44,10 +44,21 @@ def get_profile():
 def update_profile():
     user_id = g.current_user["id"]
     data = request.get_json() or {}
-    success_flag = student_model.upsert_profile(user_id, data)
-    if success_flag:
-        return success(message="Profile updated successfully")
-    return error("Failed to update profile", status=400)
+    
+    full_name = (data.get("full_name") or "").strip()
+    skills = (data.get("skills") or "").strip()
+    domain = (data.get("domain") or "").strip()
+
+    if not full_name:
+        return error("Full Name is mandatory", status=400)
+    if not skills:
+        return error("Technical & Design Skills are mandatory. Please enter your skills.", status=400)
+    if not domain:
+        return error("Focus Domain / Area of Expertise is mandatory. Please specify your domain.", status=400)
+
+    student_model.upsert_profile(user_id, data)
+    return success(message="Profile updated successfully")
+
 
 
 @student_bp.route("/submissions", methods=["GET"])

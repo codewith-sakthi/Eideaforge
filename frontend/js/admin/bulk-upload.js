@@ -62,6 +62,46 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  const btnDownloadCreds = document.getElementById('btn-download-credentials');
+  const credsContainer = document.getElementById('credentials-table-container');
+  const credsTbody = document.getElementById('credentials-tbody');
+
+  let lastGeneratedCreds = [];
+  let lastCredsFilename = '';
+
+  function downloadGeneratedCredentials() {
+    if (!lastGeneratedCreds || lastGeneratedCreds.length === 0) {
+      utils.showToast('No credentials available to download', 'warning');
+      return;
+    }
+
+    let csvContent = "Name,Email,Temporary Password,Roll Number,Department,Year of Study\n";
+    lastGeneratedCreds.forEach(c => {
+      const name = `"${(c.name || '').replace(/"/g, '""')}"`;
+      const email = `"${(c.email || '').replace(/"/g, '""')}"`;
+      const pw = `"${(c.temp_password || '').replace(/"/g, '""')}"`;
+      const roll = `"${(c.roll_number || '').replace(/"/g, '""')}"`;
+      const dept = `"${(c.department || '').replace(/"/g, '""')}"`;
+      const yr = `"${(c.year_of_study || '').replace(/"/g, '""')}"`;
+      csvContent += `${name},${email},${pw},${roll},${dept},${yr}\n`;
+    });
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', lastCredsFilename || `student_credentials_${Date.now()}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    utils.showToast('Credentials spreadsheet downloaded!', 'success');
+  }
+
+  if (btnDownloadCreds) {
+    btnDownloadCreds.addEventListener('click', downloadGeneratedCredentials);
+  }
+
   uploadBtn.addEventListener('click', async () => {
     if (fileInput.files.length === 0) return;
 
@@ -77,6 +117,29 @@ document.addEventListener('DOMContentLoaded', () => {
         resultCard.style.display = 'block';
         document.getElementById('res-created').textContent = res.data.created || 0;
         document.getElementById('res-skipped').textContent = res.data.skipped || 0;
+
+        lastGeneratedCreds = res.data.credentials || [];
+        lastCredsFilename = res.data.credentials_file || `student_credentials_${Date.now()}.csv`;
+
+        if (lastGeneratedCreds.length > 0) {
+          credsContainer.style.display = 'block';
+          credsTbody.innerHTML = lastGeneratedCreds.map(c => `
+            <tr>
+              <td style="font-weight:600; color:var(--text-main);">${utils.escapeHtml(c.name || 'N/A')}</td>
+              <td><code>${utils.escapeHtml(c.email || 'N/A')}</code></td>
+              <td><code>${utils.escapeHtml(c.roll_number || 'N/A')}</code></td>
+              <td><span style="font-family:monospace; background:#fff7ed; padding:0.25rem 0.5rem; border-radius:4px; font-weight:700; color:#ea580c;">${utils.escapeHtml(c.temp_password || '')}</span></td>
+              <td style="text-align:center;">
+                <button class="btn btn-outline btn-sm" onclick="navigator.clipboard.writeText('${utils.escapeHtml(c.temp_password || '')}').then(() => utils.showToast('Password copied!', 'success'))" style="padding:0.25rem 0.6rem; font-size:0.75rem;">
+                  📋 Copy
+                </button>
+              </td>
+            </tr>
+          `).join('');
+        } else {
+          credsContainer.style.display = 'none';
+        }
+
         utils.showToast('Batch processed successfully!', 'success');
       }
     } catch (err) {
@@ -87,3 +150,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+

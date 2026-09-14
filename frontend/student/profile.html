@@ -139,14 +139,42 @@
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="bio">Bio & Focus Areas</label>
-            <textarea id="bio" placeholder="Tell potential teammates about your interests and past projects..."></textarea>
+          <div class="grid-2">
+            <div class="form-group">
+              <label for="domain" style="display:flex; justify-content:space-between; align-items:center;">
+                <span>Primary Focus Domain / Track *</span>
+                <span class="status-pill status-rejected" style="font-size:0.7rem; padding:0.15rem 0.45rem;">Mandatory</span>
+              </label>
+              <input type="text" id="domain" list="domain-suggestions" required placeholder="e.g. Artificial Intelligence, Web Dev, IoT">
+              <datalist id="domain-suggestions">
+                <option value="Artificial Intelligence & Machine Learning">
+                <option value="Full-Stack Web & Mobile Development">
+                <option value="IoT, Robotics & Embedded Systems">
+                <option value="Cloud Computing & DevOps">
+                <option value="Cybersecurity & Network Defense">
+                <option value="Fintech & Blockchain">
+                <option value="Healthcare & BioTech">
+                <option value="CleanTech, EV & Green Energy">
+                <option value="Hardware, VLSI & Semiconductor">
+                <option value="AR/VR & Game Development">
+                <option value="Data Science & Big Data Analytics">
+              </datalist>
+              <small style="color:var(--text-muted); font-size:0.75rem; margin-top:0.25rem; display:block;">Your primary technological specialization or domain interest.</small>
+            </div>
+
+            <div class="form-group">
+              <label for="skills" style="display:flex; justify-content:space-between; align-items:center;">
+                <span>Technical & Design Skills *</span>
+                <span class="status-pill status-rejected" style="font-size:0.7rem; padding:0.15rem 0.45rem;">Mandatory</span>
+              </label>
+              <input type="text" id="skills" required placeholder="Python, React, Figma, Arduino, TensorFlow">
+              <small style="color:var(--text-muted); font-size:0.75rem; margin-top:0.25rem; display:block;">Comma-separated core skills shared with team leaders.</small>
+            </div>
           </div>
 
           <div class="form-group">
-            <label for="skills">Technical & Design Skills (comma-separated)</label>
-            <input type="text" id="skills" placeholder="Python, React, Figma, Embedded Systems">
+            <label for="bio">Bio & Focus Areas</label>
+            <textarea id="bio" placeholder="Tell potential teammates about your interests, hackathons, and past projects..."></textarea>
           </div>
 
           <div class="grid-2">
@@ -160,7 +188,7 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Save Profile Changes</button>
+          <button type="submit" class="btn btn-primary" style="margin-top: 1rem; padding:0.75rem 1.5rem; font-weight:700;">Save Profile Changes</button>
         </form>
       </div>
     </main>

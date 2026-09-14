@@ -8,8 +8,7 @@ Eideaforge empowers students to transform their innovative ideas into impactful 
 
 ## 🏗️ Architecture & Project Structure
 
-```
-EIDEAFORGE/
+``EIDEAFORGE/
 ├── frontend/             # Clean HTML5 + CSS3 + Vanilla ES6 JS (Modular REST Consumer)
 │   ├── index.html        # Public Portal
 │   ├── login.html        # Unified Role Login & Auth
@@ -78,3 +77,5 @@ Serve the `frontend/` directory using any static web server (e.g. Live Server in
 
 ## 📄 License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+#Demo by cse

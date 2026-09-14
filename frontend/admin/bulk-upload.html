@@ -80,6 +80,7 @@
           <li><a href="/admin/dashboard.html">📊 Dashboard</a></li>
           <li><a href="/admin/students.html">🎓 Students</a></li>
           <li><a href="/admin/bulk-upload.html" class="active">📥 CSV Bulk Upload</a></li>
+          <li><a href="/admin/upload-history.html">📜 Upload History</a></li>
           <li><a href="/admin/ideas.html">💡 Ideas Review</a></li>
           <li><a href="/admin/competitions.html">🏆 Competitions</a></li>
           <li><a href="/admin/submissions.html">📤 Submissions</a></li>
@@ -204,22 +205,57 @@
       </div>
 
       <!-- Result Summary Card -->
-      <div class="glass-card" id="upload-result-card" style="display:none; margin-top: 2rem; border-left: 4px solid var(--success); padding:1.5rem;">
-        <h3 style="color:#0f172a; margin-bottom:0.75rem; display:flex; align-items:center; gap:0.5rem;">
-          <span>🎉</span> Batch Processing Summary
-        </h3>
+      <div class="glass-card" id="upload-result-card" style="display:none; margin-top: 2rem; border-left: 4px solid var(--success); padding:1.75rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1rem;">
+          <h3 style="color:#0f172a; margin:0; display:flex; align-items:center; gap:0.5rem;">
+            <span>🎉</span> Batch Processing Summary
+          </h3>
+          <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+            <button id="btn-download-credentials" class="btn btn-primary" style="display:flex; align-items:center; gap:0.4rem; padding:0.55rem 1.1rem; font-weight:700; font-size:0.9rem;">
+              📥 Download Credentials (Excel/CSV)
+            </button>
+            <a href="/admin/upload-history.html" class="btn btn-outline" style="display:flex; align-items:center; gap:0.4rem; padding:0.55rem 1rem; font-size:0.9rem; text-decoration:none;">
+              📜 View Upload History →
+            </a>
+          </div>
+        </div>
+
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:1rem; margin-top:1rem;">
-          <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:1rem; text-align:center;">
-            <div style="font-size:1.6rem; font-weight:800; color:#16a34a;" id="res-created">0</div>
+          <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:10px; padding:1.1rem; text-align:center;">
+            <div style="font-size:1.8rem; font-weight:800; color:#16a34a;" id="res-created">0</div>
             <div style="font-size:0.85rem; color:#15803d; font-weight:600; margin-top:0.25rem;">Accounts Created</div>
           </div>
-          <div style="background:#fffbeb; border:1px solid #fef3c7; border-radius:8px; padding:1rem; text-align:center;">
-            <div style="font-size:1.6rem; font-weight:800; color:#d97706;" id="res-skipped">0</div>
+          <div style="background:#fffbeb; border:1px solid #fef3c7; border-radius:10px; padding:1.1rem; text-align:center;">
+            <div style="font-size:1.8rem; font-weight:800; color:#d97706;" id="res-skipped">0</div>
             <div style="font-size:0.85rem; color:#b45309; font-weight:600; margin-top:0.25rem;">Skipped (Already Exist)</div>
           </div>
         </div>
+
+        <!-- Generated Credentials Live Preview Table -->
+        <div id="credentials-table-container" style="margin-top:1.5rem; display:none;">
+          <h4 style="font-size:1rem; color:var(--text-main); margin-bottom:0.75rem; display:flex; align-items:center; gap:0.4rem;">
+            <span>🔑</span> Generated Student Login Credentials:
+          </h4>
+          <div style="overflow-x:auto; max-height:280px; overflow-y:auto; border:1px solid #e2e8f0; border-radius:10px;">
+            <table class="data-table" style="font-size:0.85rem; margin:0;">
+              <thead>
+                <tr>
+                  <th>Student Name</th>
+                  <th>Email</th>
+                  <th>Roll No</th>
+                  <th>Temporary Password</th>
+                  <th style="text-align:center;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="credentials-tbody">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
         <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 1.25rem; display:flex; align-items:center; gap:0.4rem;">
-          <span>🔒</span> Generated temporary passwords log has been securely saved in <code>backend/uploads/credentials/</code>.
+          <span>🔒</span> Generated temporary passwords log has been securely saved on the server in <code>backend/uploads/credentials/</code>.
         </p>
       </div>
     </main>
