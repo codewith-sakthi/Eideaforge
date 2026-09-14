@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ideas Moderation – Eideaforge Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+  <div class="bg-glow-1"></div>
+  <div class="bg-glow-2"></div>
+
+  <!-- Top Navbar with Search, Notifications, and User Pill -->
+  <nav class="navbar">
+    <div class="brand">
+      <a href="/admin/dashboard.html" style="color:inherit; text-decoration:none; display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-size:1.6rem;">💡</span>
+        <div>
+          <span style="font-weight:800; font-size:1.35rem; letter-spacing:-0.02em;">Eideaforge</span>
+          <div style="font-size:0.68rem; color:var(--text-muted); font-weight:500; margin-top:-3px;">Admin Command Center</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="nav-search-box">
+      <span style="color:var(--text-dim); font-size:1rem;">🔍</span>
+      <input type="text" placeholder="Search students, submissions, competitions...">
+    </div>
+
+    <div style="display:flex; align-items:center; gap:1.25rem;">
+      <div style="position:relative; cursor:pointer; font-size:1.25rem;" title="Notifications">
+        🔔<span style="position:absolute; top:-2px; right:-2px; width:8px; height:8px; background:#ef4444; border-radius:50%; border:2px solid #fff;"></span>
+      </div>
+
+      <div class="user-dropdown-wrapper">
+        <div class="nav-user-pill" id="nav-user-dropdown-btn">
+          <div class="avatar-circle" id="user-avatar-initials">A</div>
+          <div style="display:flex; flex-direction:column; line-height:1.2; text-align:left;">
+            <span style="font-weight:700; font-size:0.88rem; color:var(--text-main);" id="user-display-name">Administrator</span>
+            <span style="font-size:0.75rem; color:var(--text-muted);" id="user-role-label">Admin</span>
+          </div>
+          <span class="dropdown-arrow">▼</span>
+        </div>
+        <div class="user-dropdown-menu" id="nav-user-dropdown-menu">
+          <div class="dropdown-header">
+            <div class="avatar-circle" id="dropdown-user-avatar" style="width:40px; height:40px; font-size:1.05rem;">A</div>
+            <div style="min-width:0; overflow:hidden;">
+              <div style="font-weight:700; font-size:0.92rem; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" id="dropdown-user-name">Administrator</div>
+              <div style="font-size:0.76rem; color:var(--text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" id="dropdown-user-email">admin@college.edu</div>
+            </div>
+          </div>
+          <div class="dropdown-divider"></div>
+          <a href="/admin/profile.html" id="dropdown-profile-link" class="dropdown-item">
+            <span class="dropdown-icon">👤</span>
+            <div style="display:flex; flex-direction:column;">
+              <span style="font-weight:600; color:var(--text-main); font-size:0.88rem;">Edit Profile</span>
+              <span style="font-size:0.74rem; color:var(--text-muted);">Manage administrator settings</span>
+            </div>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="javascript:void(0)" onclick="auth.logout()" class="dropdown-item dropdown-logout">
+            <span class="dropdown-icon">🚪</span>
+            <span style="font-weight:600;">Log Out</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div>
+        <ul class="sidebar-nav">
+          <li><a href="/admin/dashboard.html">📊 Dashboard</a></li>
+          <li><a href="/admin/students.html">🎓 Students</a></li>
+          <li><a href="/admin/bulk-upload.html">📥 CSV Bulk Upload</a></li>
+          <li><a href="/admin/ideas.html" class="active">💡 Ideas Review</a></li>
+          <li><a href="/admin/competitions.html">🏆 Competitions</a></li>
+          <li><a href="/admin/submissions.html">📤 Submissions</a></li>
+          <li><a href="/admin/results.html">📈 Global Results</a></li>
+        </ul>
+
+        <!-- Sidebar Promo Card -->
+        <div class="sidebar-promo-card">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div>
+              <h4>Admin Portal</h4>
+              <p>Host new campus-wide innovation challenges.</p>
+            </div>
+            <span style="font-size:1.8rem;">🏆</span>
+          </div>
+          <a href="/admin/create-competition.html" class="btn btn-primary btn-sm" style="width:100%; font-size:0.8rem; padding:0.4rem 0.6rem;">+ New Challenge</a>
+        </div>
+      </div>
+
+      <div style="font-size:0.78rem; color:var(--text-dim); text-align:center; padding-top:1rem;">
+        Eideaforge v2.0
+      </div>
+    </aside>
+
+    <main class="dashboard-main">
+      <div class="admin-action-bar">
+        <h1>Idea Moderation & Curation</h1>
+        <div style="display: flex; gap: 1rem; align-items: center;">
+          <select id="status-filter" style="width: auto;">
+            <option value="">All Statuses</option>
+            <option value="submitted">⏳ Submitted (Needs Review)</option>
+            <option value="approved">✅ Approved</option>
+            <option value="rejected">❌ Rejected</option>
+            <option value="draft">Drafts</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="glass-card">
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Idea Title</th>
+                <th>Category</th>
+                <th>Student</th>
+                <th>Status</th>
+                <th>Date Submitted</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-ideas-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/admin/ideas.js"></script>
+</body>
+</html>

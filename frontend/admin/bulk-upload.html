@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bulk Upload Students – Eideaforge Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+  <div class="bg-glow-1"></div>
+  <div class="bg-glow-2"></div>
+
+  <!-- Top Navbar with Search, Notifications, and User Pill -->
+  <nav class="navbar">
+    <div class="brand">
+      <a href="/admin/dashboard.html" style="color:inherit; text-decoration:none; display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-size:1.6rem;">💡</span>
+        <div>
+          <span style="font-weight:800; font-size:1.35rem; letter-spacing:-0.02em;">Eideaforge</span>
+          <div style="font-size:0.68rem; color:var(--text-muted); font-weight:500; margin-top:-3px;">Admin Command Center</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="nav-search-box">
+      <span style="color:var(--text-dim); font-size:1rem;">🔍</span>
+      <input type="text" placeholder="Search students, submissions, competitions...">
+    </div>
+
+    <div style="display:flex; align-items:center; gap:1.25rem;">
+      <div style="position:relative; cursor:pointer; font-size:1.25rem;" title="Notifications">
+        🔔<span style="position:absolute; top:-2px; right:-2px; width:8px; height:8px; background:#ef4444; border-radius:50%; border:2px solid #fff;"></span>
+      </div>
+
+      <div class="user-dropdown-wrapper">
+        <div class="nav-user-pill" id="nav-user-dropdown-btn">
+          <div class="avatar-circle" id="user-avatar-initials">A</div>
+          <div style="display:flex; flex-direction:column; line-height:1.2; text-align:left;">
+            <span style="font-weight:700; font-size:0.88rem; color:var(--text-main);" id="user-display-name">Administrator</span>
+            <span style="font-size:0.75rem; color:var(--text-muted);" id="user-role-label">Admin</span>
+          </div>
+          <span class="dropdown-arrow">▼</span>
+        </div>
+        <div class="user-dropdown-menu" id="nav-user-dropdown-menu">
+          <div class="dropdown-header">
+            <div class="avatar-circle" id="dropdown-user-avatar" style="width:40px; height:40px; font-size:1.05rem;">A</div>
+            <div style="min-width:0; overflow:hidden;">
+              <div style="font-weight:700; font-size:0.92rem; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" id="dropdown-user-name">Administrator</div>
+              <div style="font-size:0.76rem; color:var(--text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" id="dropdown-user-email">admin@college.edu</div>
+            </div>
+          </div>
+          <div class="dropdown-divider"></div>
+          <a href="/admin/profile.html" id="dropdown-profile-link" class="dropdown-item">
+            <span class="dropdown-icon">👤</span>
+            <div style="display:flex; flex-direction:column;">
+              <span style="font-weight:600; color:var(--text-main); font-size:0.88rem;">Edit Profile</span>
+              <span style="font-size:0.74rem; color:var(--text-muted);">Manage administrator settings</span>
+            </div>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="javascript:void(0)" onclick="auth.logout()" class="dropdown-item dropdown-logout">
+            <span class="dropdown-icon">🚪</span>
+            <span style="font-weight:600;">Log Out</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div>
+        <ul class="sidebar-nav">
+          <li><a href="/admin/dashboard.html">📊 Dashboard</a></li>
+          <li><a href="/admin/students.html">🎓 Students</a></li>
+          <li><a href="/admin/bulk-upload.html" class="active">📥 CSV Bulk Upload</a></li>
+          <li><a href="/admin/ideas.html">💡 Ideas Review</a></li>
+          <li><a href="/admin/competitions.html">🏆 Competitions</a></li>
+          <li><a href="/admin/submissions.html">📤 Submissions</a></li>
+          <li><a href="/admin/results.html">📈 Global Results</a></li>
+        </ul>
+
+        <!-- Sidebar Promo Card -->
+        <div class="sidebar-promo-card">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div>
+              <h4>Admin Portal</h4>
+              <p>Host new campus-wide innovation challenges.</p>
+            </div>
+            <span style="font-size:1.8rem;">🏆</span>
+          </div>
+          <a href="/admin/create-competition.html" class="btn btn-primary btn-sm" style="width:100%; font-size:0.8rem; padding:0.4rem 0.6rem;">+ New Challenge</a>
+        </div>
+      </div>
+
+      <div style="font-size:0.78rem; color:var(--text-dim); text-align:center; padding-top:1rem;">
+        Eideaforge v2.0
+      </div>
+    </aside>
+
+    <main class="dashboard-main">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 2rem; flex-wrap:wrap; gap:1rem;">
+        <div>
+          <a href="/admin/students.html" style="color: var(--text-muted); font-size: 0.9rem; text-decoration:none; display:inline-flex; align-items:center; gap:0.25rem;">← Back to Students</a>
+          <h1 style="margin-top: 0.5rem; font-size:1.85rem;">Batch Student Onboarding</h1>
+          <p style="color: var(--text-muted); margin-top: 0.25rem; font-size:0.95rem;">
+            Upload a CSV file with student rosters. Passwords will be automatically generated, hashed, and exported.
+          </p>
+        </div>
+        <div style="display:flex; gap:0.75rem;">
+          <button id="btn-download-template-top" class="btn btn-secondary" style="display:flex; align-items:center; gap:0.5rem; font-weight:600;">
+            📥 Download Template
+          </button>
+        </div>
+      </div>
+
+      <!-- CSV Specification & Format Guide -->
+      <div class="glass-card" style="margin-bottom: 2rem; padding: 1.5rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.75rem;">
+          <div>
+            <h3 style="margin:0; font-size:1.15rem; display:flex; align-items:center; gap:0.5rem;">
+              <span>📋</span> CSV Format Specification
+            </h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; margin-top:0.25rem;">
+              Ensure your CSV file contains the following column headers in the first row.
+            </p>
+          </div>
+          <button id="btn-download-template" class="btn btn-primary btn-sm" style="display:flex; align-items:center; gap:0.4rem; padding:0.5rem 1rem; font-size:0.85rem;">
+            📥 Download CSV Template
+          </button>
+        </div>
+
+        <div style="overflow-x:auto; margin-top:1rem;">
+          <table class="data-table" style="font-size:0.88rem;">
+            <thead>
+              <tr>
+                <th style="width:20%;">Column Header</th>
+                <th style="width:15%;">Requirement</th>
+                <th style="width:35%;">Description</th>
+                <th style="width:30%;">Sample Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code style="color:var(--primary); font-weight:700;">email</code></td>
+                <td><span class="status-pill status-rejected" style="padding:0.2rem 0.5rem; font-size:0.75rem;">Required</span></td>
+                <td>Unique institutional email address for login</td>
+                <td><code>alex.rivera@college.edu</code></td>
+              </tr>
+              <tr>
+                <td><code style="color:var(--primary); font-weight:700;">full_name</code></td>
+                <td><span class="status-pill status-rejected" style="padding:0.2rem 0.5rem; font-size:0.75rem;">Required</span></td>
+                <td>Student's complete name</td>
+                <td><code>Alex Rivera</code></td>
+              </tr>
+              <tr>
+                <td><code style="color:var(--primary); font-weight:700;">roll_number</code></td>
+                <td><span class="status-pill status-rejected" style="padding:0.2rem 0.5rem; font-size:0.75rem;">Required</span></td>
+                <td>Unique institutional roll / registration ID</td>
+                <td><code>21CS101</code></td>
+              </tr>
+              <tr>
+                <td><code style="color:var(--text-main); font-weight:600;">department</code></td>
+                <td><span class="status-pill status-approved" style="padding:0.2rem 0.5rem; font-size:0.75rem;">Optional</span></td>
+                <td>Academic department or major</td>
+                <td><code>Computer Science</code></td>
+              </tr>
+              <tr>
+                <td><code style="color:var(--text-main); font-weight:600;">year_of_study</code></td>
+                <td><span class="status-pill status-approved" style="padding:0.2rem 0.5rem; font-size:0.75rem;">Optional</span></td>
+                <td>Current academic year (1, 2, 3, or 4)</td>
+                <td><code>3</code></td>
+              </tr>
+              <tr>
+                <td><code style="color:var(--text-main); font-weight:600;">phone</code></td>
+                <td><span class="status-pill status-approved" style="padding:0.2rem 0.5rem; font-size:0.75rem;">Optional</span></td>
+                <td>Contact phone number</td>
+                <td><code>+91 9876543210</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Upload Dropzone Card -->
+      <div class="glass-card" style="padding: 2rem;">
+        <div class="dropzone" id="csv-dropzone" style="border: 2px dashed #cbd5e1; border-radius: 12px; padding: 2.5rem 1.5rem; text-align:center; background:#ffffff; cursor:pointer; transition:all 0.2s ease;">
+          <div class="dropzone-icon" style="font-size:2.8rem; margin-bottom:0.75rem;">📄</div>
+          <h3 style="font-size:1.15rem; margin-bottom:0.35rem;">Drag & Drop Student CSV</h3>
+          <p style="color: var(--text-muted); margin: 0 0 1rem; font-size:0.9rem;">or click to browse your computer</p>
+          <input type="file" id="csv-file" accept=".csv" style="display:none;">
+          <p id="selected-filename" style="color: var(--primary); font-weight: 700; font-size:0.95rem; margin-top:0.5rem;"></p>
+        </div>
+
+        <button id="btn-process-upload" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem; font-weight:700; padding:0.85rem; font-size:1rem;" disabled>
+          Process & Create Accounts →
+        </button>
+      </div>
+
+      <!-- Result Summary Card -->
+      <div class="glass-card" id="upload-result-card" style="display:none; margin-top: 2rem; border-left: 4px solid var(--success); padding:1.5rem;">
+        <h3 style="color:#0f172a; margin-bottom:0.75rem; display:flex; align-items:center; gap:0.5rem;">
+          <span>🎉</span> Batch Processing Summary
+        </h3>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:1rem; margin-top:1rem;">
+          <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; padding:1rem; text-align:center;">
+            <div style="font-size:1.6rem; font-weight:800; color:#16a34a;" id="res-created">0</div>
+            <div style="font-size:0.85rem; color:#15803d; font-weight:600; margin-top:0.25rem;">Accounts Created</div>
+          </div>
+          <div style="background:#fffbeb; border:1px solid #fef3c7; border-radius:8px; padding:1rem; text-align:center;">
+            <div style="font-size:1.6rem; font-weight:800; color:#d97706;" id="res-skipped">0</div>
+            <div style="font-size:0.85rem; color:#b45309; font-weight:600; margin-top:0.25rem;">Skipped (Already Exist)</div>
+          </div>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 1.25rem; display:flex; align-items:center; gap:0.4rem;">
+          <span>🔒</span> Generated temporary passwords log has been securely saved in <code>backend/uploads/credentials/</code>.
+        </p>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/admin/bulk-upload.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login – Eideaforge Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/auth.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+  <div class="bg-glow-1"></div>
+  <div class="bg-glow-2"></div>
+
+  <nav class="navbar">
+    <div class="brand">
+      <a href="/index.html" style="color:inherit; text-decoration:none;"><span>💡 Eideaforge</span></a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/competitions.html">Competitions</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h2>Portal Login</h2>
+        <p>Access your innovation workspace</p>
+      </div>
+
+      <!-- Quick Role Preset Selector -->
+      <div class="role-tabs">
+        <div class="role-tab active" data-email="student1@eideaforge.edu">🎓 Student</div>
+        <div class="role-tab" data-email="evaluator1@eideaforge.edu">🧑‍⚖️ Evaluator</div>
+        <div class="role-tab" data-email="admin@eideaforge.edu">👑 Admin</div>
+      </div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label for="email">Institutional Email</label>
+          <input type="email" id="email" required placeholder="name@eideaforge.edu" value="student1@eideaforge.edu">
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="password-input-wrapper">
+            <input type="password" id="password" required placeholder="Enter password" value="Student@123">
+            <button type="button" class="password-toggle" id="toggle-pw">👁️</button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;" id="login-btn">
+          Sign In to Workspace →
+        </button>
+      </form>
+
+      <div style="margin-top: 1.5rem; text-align: center; font-size: 0.85rem; color: var(--text-dim);">
+        <p>Demo accounts ready for instant evaluation testing.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/utils.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      auth.redirectIfLoggedIn();
+
+      // Role preset tabs
+      document.querySelectorAll('.role-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          const emailInput = document.getElementById('email');
+          const pwInput = document.getElementById('password');
+          emailInput.value = tab.dataset.email;
+          if (tab.dataset.email.includes('admin')) {
+            pwInput.value = 'Admin@1234';
+          } else if (tab.dataset.email.includes('evaluator')) {
+            pwInput.value = 'Evaluator@123';
+          } else {
+            pwInput.value = 'Student@123';
+          }
+        });
+      });
+
+      // Password toggle
+      const toggleBtn = document.getElementById('toggle-pw');
+      const pwField = document.getElementById('password');
+      toggleBtn.addEventListener('click', () => {
+        pwField.type = pwField.type === 'password' ? 'text' : 'password';
+      });
+
+      // Handle login submit
+      const form = document.getElementById('login-form');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = document.getElementById('login-btn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Authenticating...';
+
+        try {
+          const res = await api.post('/auth/login', {
+            email: document.getElementById('email').value.trim(),
+            password: document.getElementById('password').value
+          });
+
+          if (res.success && res.data) {
+            auth.setSession(res.data.token, res.data.user);
+            utils.showToast('Login successful! Redirecting...', 'success');
+            
+            setTimeout(() => {
+              const urlParams = new URLSearchParams(window.location.search);
+              const redirect = urlParams.get('redirect');
+              if (redirect) {
+                window.location.href = redirect;
+              } else {
+                window.location.href = `/${res.data.user.role}/dashboard.html`;
+              }
+            }, 600);
+          }
+        } catch (err) {
+          utils.showToast(err.message || 'Login failed', 'error');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Sign In to Workspace →';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

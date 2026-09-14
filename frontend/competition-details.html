@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Competition Details – Eideaforge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/public.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+  <div class="bg-glow-1"></div>
+  <div class="bg-glow-2"></div>
+
+  <nav class="navbar">
+    <div class="brand">
+      <a href="/index.html" style="color:inherit; text-decoration:none;"><span>💡 Eideaforge</span></a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/competitions.html">Competitions</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/login.html" class="btn btn-primary btn-sm">Portal Login</a></li>
+    </ul>
+  </nav>
+
+  <main class="container" style="padding: 3rem 1.5rem;" id="comp-details-container">
+    <div style="margin-bottom: 2rem;">
+      <a href="/competitions.html" style="color: var(--text-muted); font-size: 0.9rem;">← Back to Competitions</a>
+    </div>
+
+    <div class="grid-3" style="grid-template-columns: 2fr 1fr; align-items: start;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+          <h1 id="comp-title" style="font-size: 2.25rem;">Competition Title</h1>
+          <span id="comp-status"></span>
+        </div>
+        <p id="comp-dates" style="color: var(--primary); font-weight: 600; margin-bottom: 2rem;">Timeline</p>
+
+        <div class="glass-card" style="margin-bottom: 2rem;">
+          <h3 style="margin-bottom: 1rem;">About this Challenge</h3>
+          <p id="comp-desc" style="color: var(--text-muted); line-height: 1.8; white-space: pre-line;"></p>
+        </div>
+
+        <div class="glass-card" style="margin-bottom: 2rem;">
+          <h3 style="margin-bottom: 1rem;">Rules & Guidelines</h3>
+          <p id="comp-rules" style="color: var(--text-muted); line-height: 1.8; white-space: pre-line;"></p>
+        </div>
+
+        <div>
+          <h3 style="margin-bottom: 1.25rem;">Competition Rounds</h3>
+          <div id="comp-rounds"></div>
+        </div>
+      </div>
+
+      <!-- Action Box -->
+      <div class="glass-card" style="position: sticky; top: 100px;">
+        <h3 style="margin-bottom: 1rem;">Ready to Compete?</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+          Form a team with your peers, submit your pitch deck, and pitch before a panel of industry & faculty judges.
+        </p>
+        <button id="btn-register-action" class="btn btn-primary" style="width: 100%;">
+          Register Your Team →
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/public/competition-details.js"></script>
+</body>
+</html>

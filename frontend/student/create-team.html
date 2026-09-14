@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Team – Eideaforge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/student.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+  <div class="bg-glow-1"></div>
+  <div class="bg-glow-2"></div>
+
+  <!-- Top Navbar with Search, Notifications, and User Pill -->
+  <nav class="navbar">
+    <div class="brand">
+      <a href="/student/dashboard.html" style="color:inherit; text-decoration:none; display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-size:1.6rem;">💡</span>
+        <div>
+          <span style="font-weight:800; font-size:1.35rem; letter-spacing:-0.02em;">Eideaforge</span>
+          <div style="font-size:0.68rem; color:var(--text-muted); font-weight:500; margin-top:-3px;">Ideas today. Impact tomorrow.</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="nav-search-box">
+      <span style="color:var(--text-dim); font-size:1rem;">🔍</span>
+      <input type="text" placeholder="Search ideas, competitions, or teams...">
+    </div>
+
+    <div style="display:flex; align-items:center; gap:1.25rem;">
+      <div style="position:relative; cursor:pointer; font-size:1.25rem;" title="Notifications">
+        🔔<span style="position:absolute; top:-2px; right:-2px; width:8px; height:8px; background:#ef4444; border-radius:50%; border:2px solid #fff;"></span>
+      </div>
+
+      <div class="user-dropdown-wrapper">
+        <div class="nav-user-pill" id="nav-user-dropdown-btn">
+          <div class="avatar-circle" id="user-avatar-initials">S</div>
+          <div style="display:flex; flex-direction:column; line-height:1.2; text-align:left;">
+            <span style="font-weight:700; font-size:0.88rem; color:var(--text-main);" id="user-display-name">Student</span>
+            <span style="font-size:0.75rem; color:var(--text-muted);" id="user-role-label">Student</span>
+          </div>
+          <span class="dropdown-arrow">▼</span>
+        </div>
+        <div class="user-dropdown-menu" id="nav-user-dropdown-menu">
+          <div class="dropdown-header">
+            <div class="avatar-circle" id="dropdown-user-avatar" style="width:40px; height:40px; font-size:1.05rem;">S</div>
+            <div style="min-width:0; overflow:hidden;">
+              <div style="font-weight:700; font-size:0.92rem; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" id="dropdown-user-name">Student User</div>
+              <div style="font-size:0.76rem; color:var(--text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" id="dropdown-user-email">student@college.edu</div>
+            </div>
+          </div>
+          <div class="dropdown-divider"></div>
+          <a href="/student/profile.html" id="dropdown-profile-link" class="dropdown-item">
+            <span class="dropdown-icon">👤</span>
+            <div style="display:flex; flex-direction:column;">
+              <span style="font-weight:600; color:var(--text-main); font-size:0.88rem;">Edit Profile</span>
+              <span style="font-size:0.74rem; color:var(--text-muted);">Manage personal details</span>
+            </div>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="javascript:void(0)" onclick="auth.logout()" class="dropdown-item dropdown-logout">
+            <span class="dropdown-icon">🚪</span>
+            <span style="font-weight:600;">Log Out</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div>
+        <ul class="sidebar-nav">
+          <li><a href="/student/dashboard.html">🏠 Dashboard</a></li>
+          <li><a href="/student/ideas.html">💡 My Ideas</a></li>
+          <li><a href="/student/teams.html" class="active">👥 My Teams</a></li>
+          <li><a href="/student/competitions.html">🏆 Competitions</a></li>
+          <li><a href="/student/my-submissions.html">📤 Submissions</a></li>
+          <li><a href="/student/join-requests.html">📬 Join Requests</a></li>
+          <li><a href="/student/results.html">📈 Results & Rank</a></li>
+        </ul>
+
+        <!-- Sidebar Promo Card -->
+        <div class="sidebar-promo-card">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div>
+              <h4>Big ideas<br>start with you!</h4>
+              <p>Turn your concepts into funded prototypes.</p>
+            </div>
+            <span style="font-size:1.8rem;">💡</span>
+          </div>
+          <a href="/student/create-idea.html" class="btn btn-primary btn-sm" style="width:100%; font-size:0.8rem; padding:0.4rem 0.6rem;">+ New Pitch</a>
+        </div>
+      </div>
+
+      <div style="font-size:0.78rem; color:var(--text-dim); text-align:center; padding-top:1rem;">
+        Eideaforge v2.0
+      </div>
+    </aside>
+
+    <main class="dashboard-main">
+      <div style="margin-bottom: 1.5rem;">
+        <a href="/student/teams.html" style="color: var(--text-muted); font-size: 0.9rem;">← Back to Teams</a>
+        <h1 style="margin-top: 0.5rem;">Form a New Team</h1>
+      </div>
+
+      <div class="glass-card">
+        <form id="create-team-form">
+          <div class="form-group">
+            <label for="team_name">Team / Venture Name *</label>
+            <input type="text" id="team_name" required placeholder="e.g. Quantum Pioneers">
+          </div>
+
+          <div class="form-group">
+            <label for="idea_id">Associate with an Idea (Optional)</label>
+            <select id="idea_id">
+              <option value="">-- Select an approved or draft idea --</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Create Team →</button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/utils.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      if (!auth.requireAuth('student')) return;
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const preselectedIdeaId = urlParams.get('idea_id');
+
+      // Populate user ideas
+      try {
+        const res = await api.get('/ideas?scope=mine');
+        if (res.success && res.data) {
+          const select = document.getElementById('idea_id');
+          res.data.forEach(idea => {
+            const opt = document.createElement('option');
+            opt.value = idea.id;
+            opt.textContent = `${idea.title} (${idea.status})`;
+            if (preselectedIdeaId && idea.id == preselectedIdeaId) {
+              opt.selected = true;
+            }
+            select.appendChild(opt);
+          });
+        }
+      } catch (e) {
+        console.error(e);
+      }
+
+      const form = document.getElementById('create-team-form');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const payload = {
+          name: document.getElementById('team_name').value.trim(),
+          idea_id: document.getElementById('idea_id').value ? parseInt(document.getElementById('idea_id').value) : null
+        };
+
+        try {
+          const res = await api.post('/teams', payload);
+          if (res.success) {
+            utils.showToast('Team created successfully!', 'success');
+            setTimeout(() => {
+              window.location.href = `/student/team-details.html?id=${res.data.team_id}`;
+            }, 600);
+          }
+        } catch (err) {
+          utils.showToast(err.message || 'Failed to create team', 'error');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

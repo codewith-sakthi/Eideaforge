@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Innovation Cell – Eideaforge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/public.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+  <div class="bg-glow-1"></div>
+  <div class="bg-glow-2"></div>
+
+  <nav class="navbar">
+    <div class="brand">
+      <a href="/index.html" style="color:inherit; text-decoration:none;"><span>💡 Eideaforge</span></a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/competitions.html">Competitions</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html" class="active">Contact</a></li>
+      <li><a href="/login.html" class="btn btn-primary btn-sm">Portal Login</a></li>
+    </ul>
+  </nav>
+
+  <main class="container" style="padding: 4rem 1.5rem; max-width: 900px;">
+    <h1 style="font-size: 2.75rem; margin-bottom: 1.5rem;">Contact Us</h1>
+    <div class="grid-2" style="align-items: start;">
+      <div class="glass-card">
+        <h3 style="margin-bottom: 1.25rem;">Get in Touch</h3>
+        <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem;">
+          Have questions regarding competition rules, incubation funding, or account access? Contact the Innovation Cell team.
+        </p>
+        <p style="color: var(--text-main); font-size: 0.95rem; line-height: 2;">
+          📧 <strong>Email:</strong> innovation@college.edu<br>
+          📞 <strong>Phone:</strong> +91 98765 43210<br>
+          📍 <strong>Location:</strong> CSE Department, Innovation Block
+        </p>
+      </div>
+
+      <div class="glass-card">
+        <h3 style="margin-bottom: 1.25rem;">Send a Message</h3>
+        <form onsubmit="event.preventDefault(); utils.showToast('Message sent! Our team will respond shortly.', 'success'); this.reset();">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" required placeholder="John Doe">
+          </div>
+          <div class="form-group">
+            <label>Your Email</label>
+            <input type="email" required placeholder="john@example.com">
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea required placeholder="Write your message here..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message →</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/utils.js"></script>
+</body>
+</html>

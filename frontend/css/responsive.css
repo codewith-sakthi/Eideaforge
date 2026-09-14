@@ -1,0 +1,371 @@
+/* ============================================================
+   EIDEAFORGE RESPONSIVE DESIGN SYSTEM
+   Optimized for Tablets, Mobile Phones & Small Touchscreens
+   ============================================================ */
+
+/* ── Tablet & Small Laptops (<= 1024px) ────────────────────────── */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 100%;
+    width: calc(100% - 2rem);
+    padding: 0 0.5rem;
+  }
+
+  .navbar {
+    width: calc(100% - 2rem);
+    margin: 0.75rem auto;
+    padding: 0.8rem 1.5rem;
+  }
+
+  .dashboard-layout {
+    width: calc(100% - 2rem);
+    margin: 0 auto 1.5rem auto;
+    gap: 1.25rem;
+  }
+
+  .sidebar {
+    width: 230px;
+    padding: 1.25rem 1rem;
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .stats-banner {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 1.75rem;
+    gap: 1.5rem;
+  }
+}
+
+/* ── Mobile Devices (<= 768px) ─────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Navbar */
+  .navbar {
+    padding: 0.75rem 1rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0.75rem auto;
+    width: calc(100% - 1.5rem);
+    border-radius: 14px;
+    top: 0.5rem;
+  }
+
+  .brand {
+    font-size: 1.2rem;
+  }
+
+  .nav-links {
+    gap: 0.75rem;
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-links a {
+    white-space: nowrap;
+    font-size: 0.88rem;
+  }
+
+  #user-email-display {
+    max-width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.82rem;
+  }
+
+  /* Public Hero Section */
+  .hero-section {
+    padding: 3.5rem 0 2rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 7vw, 2.75rem);
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+    font-size: 0.98rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  /* Dashboard Layout */
+  .dashboard-layout {
+    flex-direction: column;
+    min-height: auto;
+    width: calc(100% - 1.5rem);
+    margin: 0 auto 1.5rem auto;
+    gap: 1rem;
+  }
+
+  .sidebar {
+    width: 100%;
+    border: 1px solid var(--border-glass);
+    border-radius: 14px;
+    padding: 0.75rem 1rem;
+    position: sticky;
+    top: 4.5rem;
+    z-index: 50;
+    min-height: auto;
+    height: auto;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    gap: 0.35rem;
+    padding-bottom: 0.25rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .sidebar-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sidebar-nav li {
+    flex-shrink: 0;
+  }
+
+  .sidebar-nav a {
+    padding: 0.5rem 0.85rem;
+    font-size: 0.82rem;
+    white-space: nowrap;
+    border-left: 1px solid transparent;
+  }
+
+  .sidebar-nav a:hover, .sidebar-nav a.active {
+    border-left: 1px solid rgba(251, 191, 36, 0.25);
+    border-bottom: 2px solid var(--primary);
+  }
+
+  .sidebar > div:last-child {
+    display: none;
+  }
+
+  .dashboard-main {
+    padding: 1.25rem 1rem;
+    border-radius: 14px;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .dashboard-header .btn {
+    width: 100%;
+  }
+
+  /* Grids & Cards */
+  .grid-4, .grid-3, .grid-2 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .glass-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .welcome-card {
+    padding: 1.5rem 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .welcome-card h2 {
+    font-size: 1.4rem;
+  }
+
+  .metric-card {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .metric-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 1.3rem;
+  }
+
+  .metric-info h3 {
+    font-size: 1.6rem;
+  }
+
+  /* Admin & Evaluator Controls */
+  .admin-action-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .search-box {
+    min-width: 100%;
+    width: 100%;
+  }
+
+  .admin-action-bar .btn,
+  .admin-action-bar select {
+    width: 100%;
+  }
+
+  .dropzone {
+    padding: 2rem 1rem;
+  }
+
+  .dropzone-icon {
+    font-size: 2.25rem;
+  }
+
+  /* Auth Screens */
+  .auth-wrapper {
+    padding: 1.25rem 0.75rem;
+    min-height: calc(100vh - 70px);
+  }
+
+  .auth-card {
+    padding: 1.75rem 1.25rem;
+    max-width: 100%;
+  }
+
+  .auth-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .role-tabs {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    padding: 0.25rem;
+  }
+
+  .role-tab {
+    padding: 0.5rem 0.4rem;
+    font-size: 0.78rem;
+    min-width: 90px;
+  }
+
+  /* Tables & Lists */
+  .data-table-wrapper {
+    margin-top: 0.75rem;
+  }
+
+  .data-table th, .data-table td {
+    padding: 0.75rem 0.65rem;
+    font-size: 0.82rem;
+  }
+
+  /* Modals */
+  .modal-overlay {
+    padding: 1rem;
+  }
+
+  .modal-content {
+    padding: 1.5rem 1.25rem;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 3.5rem;
+    padding: 2.5rem 0 1.5rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+}
+
+/* ── Small Smartphones (<= 480px) ──────────────────────────────── */
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  .navbar {
+    padding: 0.65rem 0.75rem;
+  }
+
+  .brand span {
+    font-size: 1.1rem;
+  }
+
+  .stats-banner {
+    grid-template-columns: 1fr;
+    padding: 1.25rem 1rem;
+    gap: 1.25rem;
+    margin: 2rem 0;
+  }
+
+  .stat-value {
+    font-size: 2.2rem;
+  }
+
+  .stat-label {
+    font-size: 0.85rem;
+  }
+
+  .btn {
+    padding: 0.65rem 1.15rem;
+    font-size: 0.88rem;
+  }
+
+  .btn-sm {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.78rem;
+  }
+
+  input, select, textarea {
+    font-size: 16px; /* Prevents auto-zoom on iOS */
+    padding: 0.65rem 0.75rem;
+  }
+
+  .role-tabs {
+    flex-direction: column;
+  }
+
+  .role-tab {
+    width: 100%;
+    text-align: center;
+  }
+
+  .competition-card-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+

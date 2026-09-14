@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Innovation Competitions – Eideaforge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/public.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+  <div class="bg-glow-1"></div>
+  <div class="bg-glow-2"></div>
+
+  <nav class="navbar">
+    <div class="brand">
+      <a href="/index.html" style="color:inherit; text-decoration:none;"><span>💡 Eideaforge</span></a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/competitions.html" class="active">Competitions</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+      <li><a href="/login.html" class="btn btn-primary btn-sm">Portal Login</a></li>
+    </ul>
+  </nav>
+
+  <main class="container" style="padding: 4rem 1.5rem;">
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <h1 style="font-size: 2.75rem; margin-bottom: 0.75rem;">Competitions & Hackathons</h1>
+      <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
+        Explore all active, upcoming, and past innovation challenges across disciplines.
+      </p>
+
+      <!-- Status Filter Tabs -->
+      <div style="display: inline-flex; background: var(--bg-glass); border: 1px solid var(--border-glass); border-radius: var(--radius-full); padding: 0.35rem; margin-top: 2rem; gap: 0.25rem;">
+        <button class="filter-tab active btn-sm btn" style="border-radius: var(--radius-full);" data-filter="all">All Challenges</button>
+        <button class="filter-tab btn-sm btn" style="border-radius: var(--radius-full);" data-filter="ongoing">🔥 Ongoing</button>
+        <button class="filter-tab btn-sm btn" style="border-radius: var(--radius-full);" data-filter="upcoming">⏳ Upcoming</button>
+        <button class="filter-tab btn-sm btn" style="border-radius: var(--radius-full);" data-filter="completed">🏆 Completed</button>
+      </div>
+    </div>
+
+    <!-- Competitions Grid -->
+    <div class="grid-3" id="competitions-list">
+      <!-- Loaded dynamically via JS -->
+    </div>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/public/competitions.js"></script>
+</body>
+</html>

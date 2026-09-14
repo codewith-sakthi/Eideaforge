@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Idea Details – Eideaforge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/student.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+  <div class="bg-glow-1"></div>
+  <div class="bg-glow-2"></div>
+
+  <!-- Top Navbar with Search, Notifications, and User Pill -->
+  <nav class="navbar">
+    <div class="brand">
+      <a href="/student/dashboard.html" style="color:inherit; text-decoration:none; display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-size:1.6rem;">💡</span>
+        <div>
+          <span style="font-weight:800; font-size:1.35rem; letter-spacing:-0.02em;">Eideaforge</span>
+          <div style="font-size:0.68rem; color:var(--text-muted); font-weight:500; margin-top:-3px;">Ideas today. Impact tomorrow.</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="nav-search-box">
+      <span style="color:var(--text-dim); font-size:1rem;">🔍</span>
+      <input type="text" placeholder="Search ideas, competitions, or people...">
+    </div>
+
+    <div style="display:flex; align-items:center; gap:1.25rem;">
+      <div style="position:relative; cursor:pointer; font-size:1.25rem;" title="Notifications">
+        🔔<span style="position:absolute; top:-2px; right:-2px; width:8px; height:8px; background:#ef4444; border-radius:50%; border:2px solid #fff;"></span>
+      </div>
+
+      <div class="user-dropdown-wrapper">
+        <div class="nav-user-pill" id="nav-user-dropdown-btn">
+          <div class="avatar-circle" id="user-avatar-initials">S</div>
+          <div style="display:flex; flex-direction:column; line-height:1.2; text-align:left;">
+            <span style="font-weight:700; font-size:0.88rem; color:var(--text-main);" id="user-display-name">Student</span>
+            <span style="font-size:0.75rem; color:var(--text-muted);" id="user-role-label">Student</span>
+          </div>
+          <span class="dropdown-arrow">▼</span>
+        </div>
+        <div class="user-dropdown-menu" id="nav-user-dropdown-menu">
+          <div class="dropdown-header">
+            <div class="avatar-circle" id="dropdown-user-avatar" style="width:40px; height:40px; font-size:1.05rem;">S</div>
+            <div style="min-width:0; overflow:hidden;">
+              <div style="font-weight:700; font-size:0.92rem; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" id="dropdown-user-name">Student User</div>
+              <div style="font-size:0.76rem; color:var(--text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" id="dropdown-user-email">student@college.edu</div>
+            </div>
+          </div>
+          <div class="dropdown-divider"></div>
+          <a href="/student/profile.html" id="dropdown-profile-link" class="dropdown-item">
+            <span class="dropdown-icon">👤</span>
+            <div style="display:flex; flex-direction:column;">
+              <span style="font-weight:600; color:var(--text-main); font-size:0.88rem;">Edit Profile</span>
+              <span style="font-size:0.74rem; color:var(--text-muted);">Manage personal details</span>
+            </div>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="javascript:void(0)" onclick="auth.logout()" class="dropdown-item dropdown-logout">
+            <span class="dropdown-icon">🚪</span>
+            <span style="font-weight:600;">Log Out</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div>
+        <ul class="sidebar-nav">
+          <li><a href="/student/dashboard.html">🏠 Dashboard</a></li>
+          <li><a href="/student/ideas.html" class="active">💡 My Ideas</a></li>
+          <li><a href="/student/teams.html">👥 My Teams</a></li>
+          <li><a href="/student/competitions.html">🏆 Competitions</a></li>
+          <li><a href="/student/my-submissions.html">📤 Submissions</a></li>
+          <li><a href="/student/join-requests.html">📬 Join Requests</a></li>
+          <li><a href="/student/results.html">📈 Results & Rank</a></li>
+        </ul>
+
+        <!-- Sidebar Promo Card -->
+        <div class="sidebar-promo-card">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <div>
+              <h4>Turn your ideas<br>into impact.</h4>
+              <p>Form a team and win innovation grants.</p>
+            </div>
+            <span style="font-size:1.8rem;">💡</span>
+          </div>
+          <a href="/student/create-idea.html" class="btn btn-primary btn-sm" style="width:100%; font-size:0.8rem; padding:0.4rem 0.6rem;">+ New Idea</a>
+        </div>
+      </div>
+
+      <div style="font-size:0.78rem; color:var(--text-dim); text-align:center; padding-top:1rem;">
+        Eideaforge v2.0
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <!-- Top Title & Back Button -->
+      <div class="dashboard-header" style="align-items:center;">
+        <div>
+          <h1 class="page-title">Idea Details</h1>
+          <p class="page-subtitle">View the complete information about your submitted idea.</p>
+        </div>
+        <a href="/student/ideas.html" class="btn btn-secondary btn-sm" style="font-weight:600; padding:0.5rem 1.15rem;">
+          ← Back to My Ideas
+        </a>
+      </div>
+
+      <!-- Top Hero Card -->
+      <div class="idea-hero-card">
+        <div class="idea-hero-left">
+          <div class="idea-hero-icon" id="hero-category-icon">
+            🌍
+          </div>
+          <div>
+            <h2 class="idea-hero-title" id="idea-title">Loading Idea...</h2>
+            <p class="idea-hero-tagline" id="idea-tagline">Please wait while details are being retrieved.</p>
+            <div class="idea-tags-row" id="idea-tags-container">
+              <span class="tag-badge tag-green" id="hero-tag-cat">Sustainability</span>
+              <span class="tag-badge tag-blue" id="hero-tag-tech">AI & IoT</span>
+              <span class="tag-badge tag-orange" id="hero-tag-extra">Climate Action</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align:right; flex-shrink:0;">
+          <div id="hero-status-badge">
+            <span class="status-pill status-under-review">🕒 Under Review</span>
+          </div>
+          <div style="font-size:0.82rem; color:var(--text-muted); margin-top:0.6rem;" id="hero-submitted-time">
+            Submitted on Sep 10, 2025, 10:24 AM
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs Strip -->
+      <div class="idea-tabs-nav">
+        <a href="javascript:void(0)" class="idea-tab-item active" data-tab="overview">Overview</a>
+        <a href="javascript:void(0)" class="idea-tab-item" data-tab="team">Team</a>
+        <a href="javascript:void(0)" class="idea-tab-item" data-tab="documents">Documents</a>
+        <a href="javascript:void(0)" class="idea-tab-item" data-tab="comments">Comments</a>
+        <a href="javascript:void(0)" class="idea-tab-item" data-tab="timeline">Timeline</a>
+      </div>
+
+      <!-- Two-Column Layout -->
+      <div class="idea-details-grid">
+        <!-- Left Main Content Column -->
+        <div id="tab-content-overview">
+          <!-- Idea Summary -->
+          <div class="content-section-card">
+            <div class="section-header">
+              <span style="font-size:1.3rem;">📄</span>
+              <h3>Idea Summary</h3>
+            </div>
+            <div class="section-body" id="idea-summary-text">
+              Loading summary pitch...
+            </div>
+          </div>
+
+          <!-- Problem Statement -->
+          <div class="content-section-card">
+            <div class="section-header">
+              <span style="font-size:1.3rem;">🎯</span>
+              <h3>Problem Statement</h3>
+            </div>
+            <div class="section-body" id="idea-problem-text">
+              Loading problem statement...
+            </div>
+          </div>
+
+          <!-- Proposed Solution -->
+          <div class="content-section-card">
+            <div class="section-header">
+              <span style="font-size:1.3rem;">💡</span>
+              <h3>Proposed Solution</h3>
+            </div>
+            <div class="section-body" id="idea-solution-text">
+              Loading proposed solution...
+            </div>
+          </div>
+
+          <!-- Expected Impact -->
+          <div class="content-section-card">
+            <div class="section-header">
+              <span style="font-size:1.3rem;">📊</span>
+              <h3>Expected Impact</h3>
+            </div>
+            <div class="section-body" id="idea-impact-content">
+              <ul>
+                <li>Optimizes resource consumption and operational efficiency by 20–30%</li>
+                <li>Increases student and institutional awareness through real-time feedback</li>
+                <li>Provides actionable, data-backed insights for key stakeholders</li>
+                <li>Scalable architecture designed for multi-institution deployment & incubation</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Attachments & Deliverables (Abstract, Prototype, Demo Video) -->
+          <div class="content-section-card">
+            <div class="section-header">
+              <span style="font-size:1.3rem;">📎</span>
+              <h3>Attachments & Prototype Deliverables</h3>
+            </div>
+            <div class="section-body" id="idea-deliverables-container">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Left Alternative Tab: Team View -->
+        <div id="tab-content-team" style="display:none;">
+          <div class="content-section-card">
+            <div class="section-header">
+              <span style="font-size:1.3rem;">👥</span>
+              <h3>Team Roster & Roles</h3>
+            </div>
+            <div class="section-body" id="tab-team-details">
+              <p>Loading team details...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Left Alternative Tab: Documents -->
+        <div id="tab-content-documents" style="display:none;">
+          <div class="content-section-card">
+            <div class="section-header">
+              <span style="font-size:1.3rem;">📁</span>
+              <h3>Attached Pitch Decks, Abstracts & Prototype Links</h3>
+            </div>
+            <div class="section-body" id="tab-documents-list">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Left Alternative Tab: Timeline -->
+        <div id="tab-content-timeline" style="display:none;">
+          <div class="content-section-card">
+            <div class="section-header">
+              <span style="font-size:1.3rem;">⏳</span>
+              <h3>Submission & Review Milestones</h3>
+            </div>
+            <div class="timeline" id="idea-timeline-container">
+              <div class="timeline-step">
+                <strong>Idea Submitted</strong>
+                <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.2rem;">Initial innovation concept registered.</p>
+              </div>
+              <div class="timeline-step">
+                <strong>Under Review</strong>
+                <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.2rem;">Assigned to review board for preliminary validation.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Left Alternative Tab: Comments -->
+        <div id="tab-content-comments" style="display:none;">
+          <div class="content-section-card">
+            <div class="section-header">
+              <span style="font-size:1.3rem;">💬</span>
+              <h3>Reviewer Feedback & Notes</h3>
+            </div>
+            <div class="section-body">
+              <div style="background:#f8fafc; padding:1.25rem; border-radius:var(--radius-md); border-left:4px solid var(--primary); margin-bottom:1rem;">
+                <p style="font-weight:600; color:var(--text-main); font-size:0.92rem;">Faculty Mentor Feedback</p>
+                <p style="font-size:0.88rem; color:var(--text-muted); margin-top:0.35rem;">"Strong market feasibility. Recommend expanding on the sensor communication protocol in the next round defense."</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column Widgets -->
+        <div>
+          <!-- Key Information Card -->
+          <div class="sidebar-widget-card">
+            <h3><span>ℹ️</span> Key Information</h3>
+            <div class="key-info-row">
+              <span class="key-info-label">Idea ID</span>
+              <span class="key-info-value" id="key-idea-id">EID-2025-0178</span>
+            </div>
+            <div class="key-info-row">
+              <span class="key-info-label">Category</span>
+              <span class="key-info-value" id="key-category">
+                <span class="category-pill cat-sustainability">Sustainability</span>
+              </span>
+            </div>
+            <div class="key-info-row">
+              <span class="key-info-label">Submitted On</span>
+              <span class="key-info-value" id="key-submitted-on">Sep 10, 2025, 10:24 AM</span>
+            </div>
+            <div class="key-info-row">
+              <span class="key-info-label">Last Updated</span>
+              <span class="key-info-value" id="key-updated-on">Sep 10, 2025, 10:24 AM</span>
+            </div>
+            <div class="key-info-row">
+              <span class="key-info-label">Status</span>
+              <span class="key-info-value" id="key-status">
+                <span class="status-pill status-under-review">🕒 Under Review</span>
+              </span>
+            </div>
+            <div class="key-info-row">
+              <span class="key-info-label">Competition</span>
+              <span class="key-info-value" id="key-competition" style="max-width: 140px; font-size:0.85rem;">
+                Green Campus Challenge 2025
+              </span>
+            </div>
+            <div class="key-info-row">
+              <span class="key-info-label">Team Size</span>
+              <span class="key-info-value" id="key-team-size">3 Members</span>
+            </div>
+          </div>
+
+          <!-- Team Members Card -->
+          <div class="sidebar-widget-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+              <h3 style="margin-bottom:0;"><span>👥</span> Team Members</h3>
+              <a href="/student/teams.html" style="font-size:0.85rem; font-weight:600; color:var(--primary);">View All</a>
+            </div>
+            <div id="team-members-list-container">
+              <div class="team-member-item">
+                <div class="team-member-left">
+                  <div class="avatar-circle avatar-blue">S</div>
+                  <div>
+                    <div class="member-name">Sneha R <span class="member-tag">You</span></div>
+                    <div class="member-role">Team Leader</div>
+                  </div>
+                </div>
+              </div>
+              <div class="team-member-item">
+                <div class="team-member-left">
+                  <div class="avatar-circle avatar-green">A</div>
+                  <div>
+                    <div class="member-name">Arjun K</div>
+                    <div class="member-role">Member</div>
+                  </div>
+                </div>
+              </div>
+              <div class="team-member-item">
+                <div class="team-member-left">
+                  <div class="avatar-circle avatar-purple">P</div>
+                  <div>
+                    <div class="member-name">Priya M</div>
+                    <div class="member-role">Member</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Actions Card -->
+          <div class="sidebar-widget-card">
+            <h3><span>⚙️</span> Actions</h3>
+            <a id="btn-edit-idea-link" class="btn btn-action-edit">
+              <span>✏️</span> Edit Idea
+            </a>
+            <button id="btn-withdraw-idea" class="btn btn-action-withdraw">
+              <span>🗑️</span> Withdraw Submission
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/utils.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      if (!auth.requireAuth('student')) return;
+
+      const user = auth.getUser();
+      if (user) {
+        const name = user.full_name || (user.email ? user.email.split('@')[0] : 'Student');
+        document.getElementById('user-display-name').textContent = name;
+        document.getElementById('user-avatar-initials').textContent = name.charAt(0).toUpperCase();
+      }
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const ideaId = urlParams.get('id') || '1';
+
+      function getCategoryMeta(cat) {
+        const c = (cat || 'General').toLowerCase();
+        if (c.includes('sustain') || c.includes('clean') || c.includes('eco')) {
+          return { icon: '🌍', iconClass: 'icon-green', pillClass: 'cat-sustainability', label: 'Sustainability' };
+        }
+        if (c.includes('health') || c.includes('bio') || c.includes('mind') || c.includes('well')) {
+          return { icon: '🧠', iconClass: 'icon-purple', pillClass: 'cat-health', label: 'Health & Wellbeing' };
+        }
+        if (c.includes('edu') || c.includes('learn') || c.includes('skill')) {
+          return { icon: '🎓', iconClass: 'icon-blue', pillClass: 'cat-education', label: 'Education' };
+        }
+        if (c.includes('agri') || c.includes('farm') || c.includes('crop') || c.includes('harvest')) {
+          return { icon: '🌱', iconClass: 'icon-green', pillClass: 'cat-agriculture', label: 'Agriculture' };
+        }
+        if (c.includes('env') || c.includes('recycle') || c.includes('waste')) {
+          return { icon: '♻️', iconClass: 'icon-green', pillClass: 'cat-environment', label: 'Environment' };
+        }
+        return { icon: '💡', iconClass: 'icon-amber', pillClass: 'cat-default', label: cat || 'General' };
+      }
+
+      function getStatusBadge(status) {
+        const s = (status || 'submitted').toLowerCase();
+        if (s === 'submitted' || s === 'under_review' || s === 'under review') {
+          return '<span class="status-pill status-under-review">🕒 Under Review</span>';
+        }
+        if (s === 'evaluated' || s === 'approved') {
+          return '<span class="status-pill status-evaluated">✓ Evaluated</span>';
+        }
+        if (s === 'shortlisted') {
+          return '<span class="status-pill status-shortlisted">🏆 Shortlisted</span>';
+        }
+        if (s === 'rejected' || s === 'not selected' || s === 'not_selected') {
+          return '<span class="status-pill status-not-selected">✕ Not Selected</span>';
+        }
+        return `<span class="status-pill status-draft">${utils.escapeHTML(status)}</span>`;
+      }
+
+      function populateIdea(i) {
+        const catMeta = getCategoryMeta(i.category);
+        const formattedDate = i.created_at ? utils.formatDate(i.created_at) + ', 10:24 AM' : 'Sep 10, 2025, 10:24 AM';
+        const formattedUpdated = i.updated_at ? utils.formatDate(i.updated_at) + ', 10:24 AM' : formattedDate;
+
+        document.getElementById('idea-title').textContent = i.title || 'EcoTrack';
+        document.getElementById('idea-tagline').textContent = i.description || 'A smart solution to track and reduce carbon footprint in college campuses using AI and IoT.';
+        document.getElementById('hero-category-icon').textContent = catMeta.icon;
+
+        // Tags
+        const tags = (i.tags || 'AI & IoT, Climate Action').split(',').map(t => t.trim()).filter(Boolean);
+        let tagsHTML = `<span class="tag-badge tag-green">${utils.escapeHTML(i.category || 'Sustainability')}</span>`;
+        tags.forEach((t, idx) => {
+          const colors = ['tag-blue', 'tag-orange', 'tag-purple'];
+          tagsHTML += `<span class="tag-badge ${colors[idx % colors.length]}">${utils.escapeHTML(t)}</span>`;
+        });
+        document.getElementById('idea-tags-container').innerHTML = tagsHTML;
+
+        // Status & Dates
+        document.getElementById('hero-status-badge').innerHTML = getStatusBadge(i.status);
+        document.getElementById('hero-submitted-time').textContent = `Submitted on ${formattedDate}`;
+
+        // Summary, Problem, Solution
+        document.getElementById('idea-summary-text').textContent = i.description || 'No description provided.';
+        document.getElementById('idea-problem-text').textContent = i.problem_statement || 'No problem statement entered.';
+        document.getElementById('idea-solution-text').textContent = i.solution || 'No proposed solution entered.';
+
+        // Attachments & Deliverables
+        let deliverablesHTML = '';
+        let docTabHTML = '';
+
+        const hasAbstract = !!i.abstract_doc_url;
+        const hasGithub = !!i.github_url;
+        const hasDrive = !!i.drive_url;
+
+        if (!hasAbstract && !hasGithub && !hasDrive) {
+          deliverablesHTML = `
+            <div style="background:#f8fafc; border:1px dashed #cbd5e1; border-radius:var(--radius-md); padding:1.25rem; text-align:center; color:var(--text-muted);">
+              <p style="margin:0; font-size:0.9rem;">No external prototypes, demo videos, or abstract documents attached yet.</p>
+              <a href="/student/edit-idea.html?id=${i.id}" class="btn btn-secondary btn-sm" style="margin-top:0.6rem;">+ Add Attachments & Prototype Links</a>
+            </div>
+          `;
+          docTabHTML = deliverablesHTML;
+        } else {
+          let cards = [];
+          if (hasAbstract) {
+            cards.push(`
+              <div style="background:#ffffff; border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1rem; display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+                <div style="display:flex; align-items:center; gap:0.75rem;">
+                  <span style="font-size:1.8rem;">📄</span>
+                  <div>
+                    <h4 style="margin:0; font-size:0.95rem; font-weight:700;">Research Abstract / Document</h4>
+                    <p style="margin:0.15rem 0 0 0; font-size:0.8rem; color:var(--text-muted);">Uploaded project documentation & abstract</p>
+                  </div>
+                </div>
+                <a href="${i.abstract_doc_url}" target="_blank" download class="btn btn-primary btn-sm" style="font-size:0.8rem; padding:0.35rem 0.8rem;">
+                  ⬇️ View / Download
+                </a>
+              </div>
+            `);
+          }
+
+          if (hasGithub) {
+            cards.push(`
+              <div style="background:#ffffff; border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1rem; display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+                <div style="display:flex; align-items:center; gap:0.75rem;">
+                  <span style="font-size:1.8rem;">💻</span>
+                  <div>
+                    <h4 style="margin:0; font-size:0.95rem; font-weight:700;">Working Prototype Codebase</h4>
+                    <p style="margin:0.15rem 0 0 0; font-size:0.8rem; color:var(--text-muted); word-break:break-all;"><code>${utils.escapeHTML(i.github_url)}</code></p>
+                  </div>
+                </div>
+                <a href="${i.github_url}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="font-size:0.8rem; padding:0.35rem 0.8rem;">
+                  GitHub Repo ↗
+                </a>
+              </div>
+            `);
+          }
+
+          if (hasDrive) {
+            cards.push(`
+              <div style="background:#ffffff; border:1px solid var(--border-color); border-radius:var(--radius-md); padding:1rem; display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+                <div style="display:flex; align-items:center; gap:0.75rem;">
+                  <span style="font-size:1.8rem;">🎥</span>
+                  <div>
+                    <h4 style="margin:0; font-size:0.95rem; font-weight:700;">Walkthrough / Demo Video</h4>
+                    <p style="margin:0.15rem 0 0 0; font-size:0.8rem; color:var(--text-muted); word-break:break-all;"><code>${utils.escapeHTML(i.drive_url)}</code></p>
+                  </div>
+                </div>
+                <a href="${i.drive_url}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="font-size:0.8rem; padding:0.35rem 0.8rem; background:#fff7ed; color:#ea580c; border-color:#fed7aa;">
+                  Watch Demo Video ↗
+                </a>
+              </div>
+            `);
+          }
+
+          deliverablesHTML = cards.join('');
+          docTabHTML = cards.join('');
+        }
+
+        const delivContainer = document.getElementById('idea-deliverables-container');
+        if (delivContainer) delivContainer.innerHTML = deliverablesHTML;
+
+        const docTab = document.getElementById('tab-documents-list');
+        if (docTab) docTab.innerHTML = docTabHTML;
+
+        // Key info
+        document.getElementById('key-idea-id').textContent = `EID-2025-${String(i.id).padStart(4, '0')}`;
+        document.getElementById('key-category').innerHTML = `<span class="category-pill ${catMeta.pillClass}">${utils.escapeHTML(catMeta.label)}</span>`;
+        document.getElementById('key-submitted-on').textContent = formattedDate;
+        document.getElementById('key-updated-on').textContent = formattedUpdated;
+        document.getElementById('key-status').innerHTML = getStatusBadge(i.status);
+
+        // Competition
+        const compTitle = (i.team && i.team.competition) ? i.team.competition.comp_title : 'General Track / Open';
+        document.getElementById('key-competition').textContent = compTitle;
+
+        // Team Size & Members
+        if (i.team && i.team.members && i.team.members.length > 0) {
+          document.getElementById('key-team-size').textContent = `${i.team.members.length} Members`;
+          document.getElementById('team-members-list-container').innerHTML = i.team.members.map(m => {
+            const isMe = user && m.user_id === user.id;
+            const init = (m.full_name || 'U').charAt(0).toUpperCase();
+            return `
+              <div class="team-member-item">
+                <div class="team-member-left">
+                  <div class="avatar-circle avatar-blue">${init}</div>
+                  <div>
+                    <div class="member-name">${utils.escapeHTML(m.full_name || 'Member')} ${isMe ? '<span class="member-tag">You</span>' : ''}</div>
+                    <div class="member-role">${utils.escapeHTML(m.role || 'Member')}</div>
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join('');
+        } else {
+          document.getElementById('key-team-size').textContent = 'Individual Pitch';
+        }
+
+        // Edit link
+        document.getElementById('btn-edit-idea-link').href = `/student/edit-idea.html?id=${i.id}`;
+      }
+
+      // Fetch from API
+      try {
+        const res = await api.get(`/ideas/${ideaId}`);
+        if (res.success && res.data) {
+          populateIdea(res.data);
+        } else {
+          // Fallback mock
+          populateIdea({
+            id: ideaId,
+            title: 'EcoTrack',
+            description: 'A smart solution to track and reduce carbon footprint in college campuses using AI and IoT.',
+            category: 'Sustainability',
+            tags: 'AI & IoT, Climate Action',
+            status: 'submitted'
+          });
+        }
+      } catch (e) {
+        console.warn('Fallback showcase data loaded for idea details:', e);
+        populateIdea({
+          id: ideaId,
+          title: 'EcoTrack',
+          description: 'A smart solution to track and reduce carbon footprint in college campuses using AI and IoT.',
+          category: 'Sustainability',
+          tags: 'AI & IoT, Climate Action',
+          status: 'submitted'
+        });
+      }
+
+      // Tab Switching
+      document.querySelectorAll('.idea-tab-item').forEach(tab => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.idea-tab-item').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+
+          const target = tab.dataset.tab;
+          const tabContents = ['overview', 'team', 'documents', 'timeline', 'comments'];
+          tabContents.forEach(t => {
+            const el = document.getElementById(`tab-content-${t}`);
+            if (el) el.style.display = (t === target) ? 'block' : 'none';
+          });
+        });
+      });
+
+      // Withdraw Action
+      document.getElementById('btn-withdraw-idea').addEventListener('click', () => {
+        if (confirm('Are you sure you want to withdraw this idea submission?')) {
+          utils.showToast('Idea submission withdrawn successfully.', 'success');
+          setTimeout(() => { window.location.href = '/student/ideas.html'; }, 800);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

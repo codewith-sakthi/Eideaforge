@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Environments
+.env
+.env.local
+
+# Node & Frontend
+node_modules/
+dist/
+build/
+
+# Uploads & Logs
+backend/uploads/pitches/*
+backend/uploads/credentials/*
+backend/uploads/prototypes/*
+backend/uploads/documents/*
+backend/logs/*
+!backend/uploads/pitches/.gitkeep
+!backend/uploads/credentials/.gitkeep
+!backend/uploads/prototypes/.gitkeep
+!backend/uploads/documents/.gitkeep
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
